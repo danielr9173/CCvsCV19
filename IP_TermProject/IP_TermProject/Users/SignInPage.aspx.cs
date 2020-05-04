@@ -24,12 +24,14 @@ namespace IP_TermProject
             SqlCommand cmdAdmin = new SqlCommand();
             cmdUser.CommandType = System.Data.CommandType.Text;
             cmdAdmin.CommandType = System.Data.CommandType.Text;
-            cmdUser.CommandText = "SELECT count([User_Username]) FROM [Users] WHERE ([User_Username] = '" + txtUsername.Text + "')";     //This will return a 1 if the admin exists or 
-            cmdAdmin.CommandText = "SELECT count([Admin_Username]) FROM [Administrators] WHERE ([Admin_Username] = '" + txtUsername.Text + "')";
-            cmdUser.Connection = dbUser;                                                                                                       //0 if the admin does not exist.
+            cmdUser.CommandText = "SELECT count([User_Username]) FROM [Users] WHERE ([User_Username] = '" + txtUsername.Text + "')";                //This will return a 1 if the user/admin exists or 
+            cmdAdmin.CommandText = "SELECT count([Admin_Username]) FROM [Administrators] WHERE ([Admin_Username] = '" + txtUsername.Text + "')";    //0 if the user/admin does not exist.
+            cmdUser.Connection = dbUser;                                                                                                      
             cmdAdmin.Connection = dbAdmin;
             dbUser.Open();
             dbAdmin.Open();
+
+            HttpCookie cookie = new HttpCookie("UserInfo");                  //This cookie will hold the users username.
 
             if (cmdUser.ExecuteScalar().Equals(1))      //The ExecuteScalar() returns the count number, if the username exists it will return a 1, if not a 0,
             {
@@ -46,8 +48,15 @@ namespace IP_TermProject
                         Label3.ForeColor = System.Drawing.Color.Green;
                         Label3.Visible = true;
 
-                        Session["User"] = txtUsername.Text;                         //This will identify that a user/adim is signed in                                                       
-                        Timer1.Enabled = true;                                      //Add a simple 5 second delay
+                        cmdUser.CommandText = "SELECT [User_FName] FROM [Users] WHERE ([User_Username] = '" + txtUsername.Text + "')";
+                        cookie["First Name"] = cmdUser.ExecuteScalar().ToString();                                                      //This will have the users first name that is signing in.      
+                        cmdUser.CommandText = "SELECT [User_LName] FROM [Users] WHERE ([User_Username] = '" + txtUsername.Text + "')";
+                        cookie["Last Name"] = cmdUser.ExecuteScalar().ToString();                                                       //This will have the users last name that is signing in.  
+                        Response.Cookies.Add(cookie);                                                                                   //Then add the cookie object to the user computer, this will 
+                                                                                                                                        //be use to display the full name
+                        Session["User"] = txtUsername.Text;
+
+                        Timer1.Enabled = true;                                            //Add a simple 5 second delay
                     }
                 }
                 catch
@@ -75,8 +84,15 @@ namespace IP_TermProject
                         Label3.ForeColor = System.Drawing.Color.Green;
                         Label3.Visible = true;
 
-                        Session["Admin"] = txtUsername.Text;                         //This will identify that a admin is signed in
-                        Timer1.Enabled = true;                                       //Add a simple 5 second delay
+                        cmdAdmin.CommandText = "SELECT [Admin_FName] FROM [Administrators] WHERE ([Admin_Username] = '" + txtUsername.Text + "')";
+                        cookie["First Name"] = cmdAdmin.ExecuteScalar().ToString();                                                      //The cookie will have the users first name that is signing in.      
+                        cmdAdmin.CommandText = "SELECT [Admin_LName] FROM [Administrators] WHERE ([Admin_Username] = '" + txtUsername.Text + "')";
+                        cookie["Last Name"] = cmdAdmin.ExecuteScalar().ToString();                                                       //The cookie will have the users last name that is signing in.  
+                        Response.Cookies.Add(cookie);                                                                                   //Then add the cookie object to the admins computer, this will 
+                                                                                                                                        //be use to display the full name
+                        Session["Admin"] = txtUsername.Text;
+
+                        Timer2.Enabled = true;                                       //Add a simple 5 second delay
                     }
                     else
                     {
@@ -103,7 +119,12 @@ namespace IP_TermProject
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            Response.Redirect("/HomePage.aspx");
+            Response.Redirect("HomePage.aspx");
+        }
+
+        protected void Timer2_Tick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Administrators/AdminHome.aspx");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" UnobtrusiveValidationMode="None" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LogOutPage.aspx.cs" Inherits="IP_TermProject.WebForm4" %>
+﻿<%@ Page Title="" Language="C#" UnobtrusiveValidationMode="None" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="LogOutPage.aspx.cs" Inherits="IP_TermProject.WebForm4" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Page_Header" runat="server">
     <!-- Hero -->

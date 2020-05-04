@@ -1,16 +1,16 @@
-﻿<%@ Page Title="Corpus Christi vs. COVID-19" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="IP_TermProject.WebForm1" %>
+﻿<%@ Page Title="Corpus Christi vs. COVID-19" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="IP_TermProject.WebForm1" %>
 
 <asp:Content ID="Content_Header" ContentPlaceHolderID="Page_Header" runat="server">
     <!-- Hero -->
     <section id="hero" class="container">
         <header>
-            <h2>Corpus Christi needs your help!</h2>
+            <h2><asp:Label ID="lblHeader" runat="server" Text="Corpus Christi needs your help!"></asp:Label></h2>
         </header>
         <p>
-            To beat the <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html" target="_blank">Coronavirus Disease</a>, our local hospitals need to protect themselves from getting infected.
-			By showing our support we are helping out by making and contributing Personal Protective Equipment such as face sheilds and masks. 
-			These PPE's are the most beneficial to our local health workers by protecting their facial region from getting infected by Covid-19.
-
+            To beat the <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html" target="_blank" style="font-weight:bold">Coronavirus Disease</a>, our local hospitals need to protect 
+            themselves from getting infected. By showing our support we are helping out by making and contributing Personal Protective Equipment such as face sheilds
+            and masks. These PPE's are the most beneficial to our local health workers by protecting their facial region from getting infected by Covid-19.
+            <asp:Label ID="lblPara" runat="server" Text=""></asp:Label>
         </p>
         <ul class="actions">
             <li><a href="CreatePage.aspx" class="button" runat="server" id="btnStart">Lets get started</a></li>
@@ -27,7 +27,7 @@
                 <section class="col-6 col-12-narrower feature">
                     <div class="image-wrapper first">
                         <a href="#" class="image featured first">
-                            <img src="images/CC.png" alt="" /></a>
+                            <img src="../images/CC.png" alt="" /></a>
                     </div>
                     <header>
                         <h2>Project Goals</h2>
@@ -37,13 +37,13 @@
                         such as face sheilds and masks, so they can be donated to our local hopitals.
                     </p>
                     <ul class="actions">
-                        <li><a href="#" class="button">Read More</a></li>
+                        <li><a href="ProjectPage.aspx" class="button">Read More</a></li>
                     </ul>
                 </section>
                 <section class="col-6 col-12-narrower feature">
                     <div class="image-wrapper">
-                        <a href="#" class="image featured">
-                            <img src="images/faceshields.png" alt="" /></a>
+                        <a href="InfoPage.aspx" class="image featured">
+                            <img src="../images/faceshields.png" alt="" /></a>
                     </div>
                     <header>
                         <h2>Getting Started</h2>
@@ -64,7 +64,7 @@
             <section id="promo">
                 <h2>Drop off Scheduling</h2>
                 <p>Finished manufacturing your PPE's? Schedulea drop off date with us to get it sent as soon as possible.</p>
-                <a href="#" class="button">Schedule</a>
+                <a href="UserScheduling.aspx" class="button">Schedule</a>
             </section>
         </div>
     </div>

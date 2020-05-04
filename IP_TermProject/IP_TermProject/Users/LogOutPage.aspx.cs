@@ -17,7 +17,7 @@ namespace IP_TermProject
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            Response.Redirect("/HomePage.aspx");       //Go back to the homepage
+            Response.Redirect("HomePage.aspx");       //Go back to the homepage
         }
     }
 }
